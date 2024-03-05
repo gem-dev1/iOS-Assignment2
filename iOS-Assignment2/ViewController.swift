@@ -13,8 +13,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var p2 = Product(name: "Scissors", price: 13.5, quantity: 15, id:2)
     var p3 = Product(name: "Sticky Notes", price: 14.5, quantity: 35, id:3)
     var allProducts = [Product]()
+    var allHistory = [History]()
     
     var quantity = 0
+    var computedTotal = Double(0)
     
     var selectedProduct = Product()
     
@@ -56,7 +58,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if selectedProduct.id != 0 && selectedProduct.quantity >= quantity {
             let idx = selectedProduct.id - 1
             allProducts[idx].quantity = selectedProduct.quantity - quantity
-            //decreaseQuantity(for: selectedProduct.id, by: quantity)
+            
+            let new_history = History(name: selectedProduct.name, quantity: quantity, total: computedTotal)
+            allHistory.append(new_history)
+            
             let alert = UIAlertController(title: "You have purchased \(quantity) \(selectedProduct.name)(s)", message: "", preferredStyle: .alert)
                 
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -72,15 +77,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         clearSelection()
     }
     
-    func decreaseQuantity(for productId: Int, by amount: Int) {
-        if let index = allProducts.firstIndex(where: { $0.id == productId }) {
-            
-            allProducts[index].quantity -= amount
-        }
-    }
-    
     func clearSelection() {
         quantity = 0
+        computedTotal = 0
         selectedProduct = Product()
         qtyLabel.text = "Qty: 0"
         productLabel.text = "Item: None"
@@ -89,7 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func updateTotal() {
         if quantity != 0 && selectedProduct.price != 0 {
-            var computedTotal = Double(quantity) * selectedProduct.price
+            computedTotal = Double(quantity) * selectedProduct.price
             totalLabel.text = "Total: \(computedTotal)"
         }
     }
@@ -102,11 +101,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "managerPanel"{
+            let MP = segue.destination as? managerViewController
+            MP?.allHistoryMP = allHistory
+        } else {
+            let HP = segue.destination as? historyViewController
+            HP?.allHistoryView = allHistory
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? productTableViewCell
         
         cell?.productName?.text = allProducts[indexPath.row].name
-        cell?.productPrice?.text = String(allProducts[indexPath.row].price)
+        cell?.productPrice?.text = "$\(allProducts[indexPath.row].price)"
         cell?.productQty?.text = String(allProducts[indexPath.row].quantity)
         
         return cell!
