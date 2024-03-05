@@ -9,22 +9,30 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var p1 = Product(name: "Paper", price: 12.5, quantity: 10)
-    var p2 = Product(name: "Scissors", price: 13.5, quantity: 11)
-    var p3 = Product(name: "Sticky Notes", price: 14.5, quantity: 12)
+    var p1 = Product(name: "Paper", price: 5.5, quantity: 50, id:1)
+    var p2 = Product(name: "Scissors", price: 13.5, quantity: 15, id:2)
+    var p3 = Product(name: "Sticky Notes", price: 14.5, quantity: 35, id:3)
     var allProducts = [Product]()
     
     var quantity = 0
+    
+    var selectedProduct = Product()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         allProducts.append(p1)
         allProducts.append(p2)
-        allProducts.append(p3	)
+        allProducts.append(p3)
     }
 
     @IBOutlet weak var qtyLabel: UILabel!
+    @IBOutlet weak var productLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
+    
+    @IBOutlet weak var productTableMain: UITableView!
+    
     
     @IBAction func onDigitClick(_ sender: Any) {
         let buttonDigit = sender as! UIButton
@@ -35,15 +43,56 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         qtyLabel.text = "Qty: \(quantity)"
         // qtyLabel.text = "\(quantity)"
         
+        updateTotal()
+        
     }
     
     @IBAction func onClearClick(_ sender: UIButton) {
-        quantity = 0
-        qtyLabel.text = "Qty: 0"
+        clearSelection()
     }
     
     
+    @IBAction func onBuyClick(_ sender: UIButton) {
+        if selectedProduct.id != 0 && selectedProduct.quantity >= quantity {
+            let idx = selectedProduct.id - 1
+            allProducts[idx].quantity = selectedProduct.quantity - quantity
+            //decreaseQuantity(for: selectedProduct.id, by: quantity)
+            let alert = UIAlertController(title: "You have purchased \(quantity) \(selectedProduct.name)(s)", message: "", preferredStyle: .alert)
+                
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                present(alert, animated: true)
+        } else {
+            
+            let alert = UIAlertController(title: "There is an issue with the quantity or product to purchase. Please make sure both are selected and valid", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alert, animated: true)
+        }
+        productTableMain.reloadData()
+        
+        clearSelection()
+    }
     
+    func decreaseQuantity(for productId: Int, by amount: Int) {
+        if let index = allProducts.firstIndex(where: { $0.id == productId }) {
+            
+            allProducts[index].quantity -= amount
+        }
+    }
+    
+    func clearSelection() {
+        quantity = 0
+        selectedProduct = Product()
+        qtyLabel.text = "Qty: 0"
+        productLabel.text = "Item: None"
+        totalLabel.text = "Total: 0"
+    }
+    
+    func updateTotal() {
+        if quantity != 0 && selectedProduct.price != 0 {
+            var computedTotal = Double(quantity) * selectedProduct.price
+            totalLabel.text = "Total: \(computedTotal)"
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allProducts.count
@@ -52,14 +101,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 1
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? productTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? productTableViewCell
         
         cell?.productName?.text = allProducts[indexPath.row].name
         cell?.productPrice?.text = String(allProducts[indexPath.row].price)
         cell?.productQty?.text = String(allProducts[indexPath.row].quantity)
         
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedProduct = allProducts[indexPath.row]
+        productLabel.text = "Item: \(selectedProduct.name)"
+
+        updateTotal()
     }
     
 }
