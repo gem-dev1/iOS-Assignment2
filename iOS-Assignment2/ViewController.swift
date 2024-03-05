@@ -27,8 +27,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var qtyLabel: UILabel!
     
     @IBAction func onDigitClick(_ sender: Any) {
-        var buttonDigit = sender as! UIButton
-        var clickedDigit = buttonDigit.titleLabel!.text!
+        let buttonDigit = sender as! UIButton
+        let clickedDigit = buttonDigit.titleLabel!.text!
         
         var quantityString = "\(String(quantity))\(clickedDigit)"
         quantity = Int(quantityString)!
@@ -53,10 +53,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? productTableViewCell
         
-        cell?.textLabel?.text = allProducts[indexPath.row].name
-        cell?.detailTextLabel?.text = String(allProducts[indexPath.row].price)
+        cell?.productName?.text = allProducts[indexPath.row].name
+        cell?.productPrice?.text = String(allProducts[indexPath.row].price)
+        cell?.productQty?.text = String(allProducts[indexPath.row].quantity)
         
         return cell!
     }
