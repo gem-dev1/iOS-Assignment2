@@ -9,15 +9,15 @@ import UIKit
 
 class historyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var selectedProduct = History(name: "", quantity: 0, total: 0.0)
     var allHistoryView = [History]()
     
-    @IBOutlet weak var testLabel: UILabel!
     
-
+    @IBOutlet weak var historyTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testLabel.text = "\(allHistoryView.count)"
         // Set the delegate and data source for the table view
         //tableView.delegate = self
         //tableView.dataSource = self
@@ -43,9 +43,23 @@ class historyViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //selectedProduct = allHistoryView[indexPath.row]
+        selectedProduct = allHistoryView[indexPath.row]
     }
-
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "tohistItem"{
+            let histItem = segue.destination as? histItemViewController
+            
+            let sh = allHistoryView[historyTable.indexPathForSelectedRow!.row]
+            histItem?.name = sh.name
+            histItem?.quantity = sh.quantity
+            histItem?.timestamp = sh.datetime
+            histItem?.total = sh.total
+        }
+        
+    }
     /*
     // MARK: - Navigation
 

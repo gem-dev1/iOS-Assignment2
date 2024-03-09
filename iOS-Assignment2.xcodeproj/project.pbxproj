@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1760E52B9C283300712E86 /* histItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1760E42B9C283300712E86 /* histItemViewController.swift */; };
 		2F3161A92B969E41005F0023 /* productTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3161A82B969E41005F0023 /* productTableViewCell.swift */; };
 		2F3161AB2B96B8D7005F0023 /* managerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3161AA2B96B8D7005F0023 /* managerViewController.swift */; };
 		2F3161AD2B96BE84005F0023 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3161AC2B96BE84005F0023 /* History.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F1760E42B9C283300712E86 /* histItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = histItemViewController.swift; sourceTree = "<group>"; };
 		2F3161A82B969E41005F0023 /* productTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productTableViewCell.swift; sourceTree = "<group>"; };
 		2F3161AA2B96B8D7005F0023 /* managerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = managerViewController.swift; sourceTree = "<group>"; };
 		2F3161AC2B96BE84005F0023 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				2F3161AA2B96B8D7005F0023 /* managerViewController.swift */,
 				2F3161AC2B96BE84005F0023 /* History.swift */,
 				2F3161AE2B96C377005F0023 /* historyViewController.swift */,
+				2F1760E42B9C283300712E86 /* histItemViewController.swift */,
 			);
 			path = "iOS-Assignment2";
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				2F8E16672B86F5D10024735E /* AppDelegate.swift in Sources */,
 				2F8E16692B86F5D10024735E /* SceneDelegate.swift in Sources */,
 				2F3161AF2B96C377005F0023 /* historyViewController.swift in Sources */,
+				2F1760E52B9C283300712E86 /* histItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

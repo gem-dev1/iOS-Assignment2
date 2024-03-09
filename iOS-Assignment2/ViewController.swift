@@ -106,10 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "managerPanel"{
             let MP = segue.destination as? managerViewController
             MP?.allHistoryMP = allHistory
-        } else {
-            let HP = segue.destination as? historyViewController
-            HP?.allHistoryView = allHistory
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
