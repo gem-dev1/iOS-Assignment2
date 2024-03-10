@@ -21,10 +21,10 @@ class histItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = name
-        totalLabel.text = "\(total)"
-        qtyLabel.text = "\(quantity)"
-        timeLabel.text = timestamp
+        nameLabel.text = "Product: \(name)"
+        totalLabel.text = "Total: \(total)"
+        qtyLabel.text = "Quantity: \(quantity)"
+        timeLabel.text = "TImestamp: \(timestamp)"
 
         // Do any additional setup after loading the view.
     }

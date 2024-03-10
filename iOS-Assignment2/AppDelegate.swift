@@ -9,10 +9,20 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    //
+    var test = 0
+    var globalProducts = [Product]()
+    
+    var p1 = Product(name: "Paper", price: 5.5, quantity: 50, id:1)
+    var p2 = Product(name: "Scissors", price: 13.5, quantity: 15, id:2)
+    var p3 = Product(name: "Sticky Notes", price: 14.5, quantity: 35, id:3)
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        globalProducts.append(p1)
+        globalProducts.append(p2)
+        globalProducts.append(p3)
         // Override po	int for customization after application launch.
         return true
     }

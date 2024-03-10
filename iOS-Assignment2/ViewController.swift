@@ -12,8 +12,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var p1 = Product(name: "Paper", price: 5.5, quantity: 50, id:1)
     var p2 = Product(name: "Scissors", price: 13.5, quantity: 15, id:2)
     var p3 = Product(name: "Sticky Notes", price: 14.5, quantity: 35, id:3)
-    var allProducts = [Product]()
+    //var allProducts = [Product]()
     var allHistory = [History]()
+    
+    var allProducts = (UIApplication.shared.delegate as? AppDelegate)!.globalProducts
+    
+    
+    @IBOutlet weak var productTable: UITableView!
     
     var quantity = 0
     var computedTotal = Double(0)
@@ -23,15 +28,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        allProducts.append(p1)
-        allProducts.append(p2)
-        allProducts.append(p3)
+        //allProducts.append(p1)
+        //allProducts.append(p2)
+        //allProducts.append(p3)
     }
-
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        allProducts = (UIApplication.shared.delegate as? AppDelegate)!.globalProducts
+        productTable.reloadData()
+        
+    }
     @IBOutlet weak var qtyLabel: UILabel!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
+    // (UIApplication.shared.delegate as? AppDelegate)?.globalProducts.append(self.newcontact)
     
     @IBOutlet weak var productTableMain: UITableView!
     
@@ -57,7 +69,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func onBuyClick(_ sender: UIButton) {
         if selectedProduct.id != 0 && selectedProduct.quantity >= quantity {
             let idx = selectedProduct.id - 1
-            allProducts[idx].quantity = selectedProduct.quantity - quantity
+            //allProducts[idx].quantity = selectedProduct.quantity - quantity
+            (UIApplication.shared.delegate as? AppDelegate)?.globalProducts[idx].quantity = selectedProduct.quantity - quantity
             
             let new_history = History(name: selectedProduct.name, quantity: quantity, total: computedTotal)
             allHistory.append(new_history)

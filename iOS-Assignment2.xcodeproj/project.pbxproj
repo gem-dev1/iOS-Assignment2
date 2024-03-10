@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F07509B2B9D40F700C69D8D /* restockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F07509A2B9D40F700C69D8D /* restockViewController.swift */; };
 		2F1760E52B9C283300712E86 /* histItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1760E42B9C283300712E86 /* histItemViewController.swift */; };
 		2F3161A92B969E41005F0023 /* productTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3161A82B969E41005F0023 /* productTableViewCell.swift */; };
 		2F3161AB2B96B8D7005F0023 /* managerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3161AA2B96B8D7005F0023 /* managerViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F07509A2B9D40F700C69D8D /* restockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = restockViewController.swift; sourceTree = "<group>"; };
 		2F1760E42B9C283300712E86 /* histItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = histItemViewController.swift; sourceTree = "<group>"; };
 		2F3161A82B969E41005F0023 /* productTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productTableViewCell.swift; sourceTree = "<group>"; };
 		2F3161AA2B96B8D7005F0023 /* managerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = managerViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				2F3161AC2B96BE84005F0023 /* History.swift */,
 				2F3161AE2B96C377005F0023 /* historyViewController.swift */,
 				2F1760E42B9C283300712E86 /* histItemViewController.swift */,
+				2F07509A2B9D40F700C69D8D /* restockViewController.swift */,
 			);
 			path = "iOS-Assignment2";
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F07509B2B9D40F700C69D8D /* restockViewController.swift in Sources */,
 				2F8E166B2B86F5D10024735E /* ViewController.swift in Sources */,
 				2FDEBF302B88519800189AD3 /* Products.swift in Sources */,
 				2F3161AD2B96BE84005F0023 /* History.swift in Sources */,
